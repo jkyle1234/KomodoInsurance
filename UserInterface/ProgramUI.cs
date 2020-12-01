@@ -73,11 +73,14 @@ namespace UserInterface
                     GetNumberOfLicensesNeeded();
                     break;
                 case 7:
+                    RemoveTeam();
+                    break;
+                case 8:
                     keepRunning = false;
                     Console.WriteLine("Goodbye");
                     break;
                 default:
-                    Console.WriteLine("Please enter a valid number 1-7.");
+                    Console.WriteLine("Please enter a valid number 1-8.");
                     break;
 
             }
@@ -85,6 +88,27 @@ namespace UserInterface
             Console.WriteLine("Please press any key to continue...");
             Console.ReadKey();
             Console.Clear();
+
+        }
+
+        private void RemoveTeam()
+        {
+            Console.Clear();
+            DisplayDevelperlist();
+            DisplayTeamList();
+            Console.WriteLine("Please enter the teamid: ");
+            long teamid = GetValidID();
+            bool deleted = devTeamRepo.DeleteTeam(teamid);
+            if(deleted)
+            {
+                Console.WriteLine("Team " + teamid.ToString() + " deleted.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid team id");
+            }
+
+
 
         }
 
@@ -267,8 +291,9 @@ namespace UserInterface
             Console.WriteLine("3. Add Developer To Team");
             Console.WriteLine("4. Add Multiple Developers To Team");
             Console.WriteLine("5. Remove Developer From Team");
-            Console.WriteLine("6. Get Numver Of Pluarlsight Licenses Needed");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("6. Get Number Of Pluarlsight Licenses Needed");
+            Console.WriteLine("7. Delete team");
+            Console.WriteLine("8. Exit");
             
         }
 
